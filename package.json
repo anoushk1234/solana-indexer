@@ -1,0 +1,27 @@
+{
+  "name": "solana-indexer",
+  "version": "1.0.0",
+  "main": "core/index.ts",
+  "repository": "https://github.com/anoushk1234/solana-indexer.git",
+  "author": "anoushk1234 <anoushka1828@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "dev": "nodemon --watch core/* --exec \"ts-node core/index.ts\""
+  },
+  "dependencies": {
+    "@project-serum/anchor": "^0.25.0",
+    "@solana/web3.js": "^1.53.0",
+    "blessed": "^0.1.81",
+    "blessed-contrib": "^4.11.0",
+    "borsh": "^0.7.0",
+    "fs": "^0.0.1-security",
+    "maketypes": "^1.1.2",
+    "terminal-canvas": "^3.1.2",
+    "terminal-table": "^0.0.12"
+  },
+  "devDependencies": {
+    "@types/blessed": "^0.1.19",
+    "chalk": "^4.1.2"
+  }
+}
