@@ -30,12 +30,13 @@ export class AccountParser {
     let fetchedAccounts = await this.connection.getProgramAccounts(
       new PublicKey(this.programId)
     );
+    // console.log(fetchedAccounts);
     fetchedAccounts.map((account) => {
       try {
         this.parsedAccounts.push(
           coder.accounts.decode(accountName, account.account.data)
         );
-        this.accountQty++;
+        console.log(coder.accounts.decode(accountName, account.account.data));
       } catch (e) {}
     });
     return [this.parsedAccounts, this.accountQty];

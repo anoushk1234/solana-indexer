@@ -1,0 +1,1 @@
+docker build -t anoushk2952/solana-indexer:1.0 .

@@ -29,6 +29,7 @@ const main = async () => {
       .slice(0, parser.accountNames.length)
       .map(async (accountName) => {
         let data = await parser.getParsedAccounts(accountName);
+
         let [parsedAccounts, accountQty] = data;
         qtys.push(accountQty);
         statuses.push(

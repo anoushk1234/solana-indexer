@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+  api:
+    container_name: indexerapi
+    restart: always
+    build: .
+    ports:
+      - 8000:8080
+    depends_on:
+      - db
+    volumes:
+      - .:/usr/src/app
+
+  db:
+    container_name: postgres
+    image: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - data:/data/db
+    environment:
+      - POSTGRES_DB="indexerapi"
+
+volumes:
+  data: {}
