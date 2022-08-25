@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model EventAccount {
+    pubkey              String    @id
+    title               String
+    description         String
+    uri                 String
+    link                String
+    fee                 String
+    seats               String
+    occupiedSeats       String
+    date                String
+    collection          String
+    venue               String
+    authority           String
+    creators            String[]
+    eventHost           EventHost @relation(fields: [eventHostId], references: [pubKey])
+    eventHostId         String
+    eventNonce          String
+    bump                String
+    isCutPayedByCreator String
+    isCustomSplToken    String
+    customSplToken      String
+}
+
+model EventHostAccount {
+    pubkey          String      @id
+    eventHostStruct EventHost[]
+}
+
+model AdminAccount {
+    pubkey           String   @id
+    admins           String[]
+    bump             String
+    authority        String
+    verifiedPartners String[]
+}
+
+model EventHost {
+    eventsCreated    String[]
+    displayName      String
+    pubKey           String
+    profileImage     String
+    eventCount       String
+    bump             String
+    EventAccount     EventAccount[]
+    EventHostAccount EventHostAccount[]
+}

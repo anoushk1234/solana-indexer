@@ -60,6 +60,11 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
+"@prisma/engines@4.2.1":
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/@prisma/engines/-/engines-4.2.1.tgz#60c7d0acc1c0c5b70ece712e2cbe13f46a345d6e"
+  integrity sha512-0KqBwREUOjBiHwITsQzw2DWfLHjntvbqzGRawj4sBMnIiL5CXwyDUKeHOwXzKMtNr1rEjxEsypM14g0CzLRK3g==
+
 "@project-serum/anchor@^0.25.0":
   version "0.25.0"
   resolved "https://registry.yarnpkg.com/@project-serum/anchor/-/anchor-0.25.0.tgz#88ee4843336005cf5a64c80636ce626f0996f503"
@@ -1388,11 +1393,6 @@ node-gyp-build@^4.2.0, node-gyp-build@^4.3.0:
   resolved "https://registry.yarnpkg.com/node-gyp-build/-/node-gyp-build-4.5.0.tgz#7a64eefa0b21112f89f58379da128ac177f20e40"
   integrity sha512-2iGbaQBV+ITgCz76ZEjmhUKAKVf7xfY1sRl4UiKQspfZMH2h06SyhNsnSVy50cwkFQDGLyif6m/6uFXHkOZ6rg==
 
-node-postgres@^0.6.2:
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/node-postgres/-/node-postgres-0.6.2.tgz#e06ae84aacf1634fadc2ed72427c8cd55e2d945b"
-  integrity sha512-wjaW+KutPOFemtBDuogyy6OMMOs2vpSOwuqbUhFUbrDEOTk66K2lmRyvOdO4t26qGtnPyZXQ4bAuF17cBhi5aQ==
-
 nopt@~2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/nopt/-/nopt-2.1.2.tgz#6cccd977b80132a07731d6e8ce58c2c8303cf9af"
@@ -1557,6 +1557,13 @@ png-js@~0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/png-js/-/png-js-0.1.1.tgz#1cc7c212303acabe74263ec3ac78009580242d93"
   integrity sha512-NTtk2SyfjBm+xYl2/VZJBhFnTQ4kU5qWC7VC4/iGbrgiU4FuB4xC+74erxADYJIqZICOR1HCvRA7EBHkpjTg9g==
+
+prisma@^4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/prisma/-/prisma-4.2.1.tgz#3558359f15021aa4767de8c6d0ca1f285cf33d65"
+  integrity sha512-HuYqnTDgH8atjPGtYmY0Ql9XrrJnfW7daG1PtAJRW0E6gJxc50lY3vrIDn0yjMR3TvRlypjTcspQX8DT+xD4Sg==
+  dependencies:
+    "@prisma/engines" "4.2.1"
 
 promise-callbacks@^3.8.1:
   version "3.8.2"

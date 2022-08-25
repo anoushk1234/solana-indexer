@@ -1,32 +1,63 @@
 {
-  "version": "0.0.0",
-  "name": "solvent",
+  "version": "0.1.1",
+  "name": "squads_mpl",
   "instructions": [
     {
-      "name": "newBucketV2",
+      "name": "create",
       "accounts": [
         {
-          "name": "bucketCreator",
-          "isMut": false,
-          "isSigner": true
-        },
-        {
-          "name": "solventAuthority",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "bucketStateV2",
+          "name": "multisig",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "bucketMint",
+          "name": "creator",
           "isMut": true,
           "isSigner": true
         },
         {
-          "name": "tokenProgram",
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "threshold",
+          "type": "u16"
+        },
+        {
+          "name": "createKey",
+          "type": "publicKey"
+        },
+        {
+          "name": "members",
+          "type": {
+            "vec": "publicKey"
+          }
+        }
+      ]
+    },
+    {
+      "name": "addMember",
+      "accounts": [
+        {
+          "name": "multisig",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "multisigAuth",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "member",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "rent",
           "isMut": false,
           "isSigner": false
         },
@@ -34,180 +65,81 @@
           "name": "systemProgram",
           "isMut": false,
           "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "newMember",
+          "type": "publicKey"
+        }
+      ]
+    },
+    {
+      "name": "removeMember",
+      "accounts": [
+        {
+          "name": "multisig",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "multisigAuth",
+          "isMut": true,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "oldMember",
+          "type": "publicKey"
+        }
+      ]
+    },
+    {
+      "name": "removeMemberAndChangeThreshold",
+      "accounts": [
+        {
+          "name": "multisig",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "multisigAuth",
+          "isMut": true,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "oldMember",
+          "type": "publicKey"
+        },
+        {
+          "name": "newThreshold",
+          "type": "u16"
+        }
+      ]
+    },
+    {
+      "name": "addMemberAndChangeThreshold",
+      "accounts": [
+        {
+          "name": "multisig",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "multisigAuth",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "member",
+          "isMut": true,
+          "isSigner": true
         },
         {
           "name": "rent",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "solventAuthorityBump",
-          "type": "u8"
-        },
-        {
-          "name": "bucketStateBump",
-          "type": "u8"
-        },
-        {
-          "name": "symbol",
-          "type": "string"
-        }
-      ]
-    },
-    {
-      "name": "mintDropletV2",
-      "accounts": [
-        {
-          "name": "signerWallet",
-          "isMut": false,
-          "isSigner": true
-        },
-        {
-          "name": "solventAuthority",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "bucketStateV2",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "bucketMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "nftMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "metadata",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "signerTokenAc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "solventTokenAc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "solventMintFeeAc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "destinationDropletAc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "solventAuthorityBump",
-          "type": "u8"
-        }
-      ]
-    },
-    {
-      "name": "burnDropletAndRedeemTokenV2",
-      "accounts": [
-        {
-          "name": "signerWallet",
-          "isMut": false,
-          "isSigner": true
-        },
-        {
-          "name": "solventAuthority",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "bucketStateV2",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "bucketMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "nftMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "metadata",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "solventTokenAc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "destinationTokenAc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "signerDropletAc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "solventAuthorityBump",
-          "type": "u8"
-        }
-      ]
-    },
-    {
-      "name": "migrateBucketToV2",
-      "accounts": [
-        {
-          "name": "bucketCreator",
-          "isMut": false,
-          "isSigner": true
-        },
-        {
-          "name": "solventAuthority",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "bucketStateOld",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "bucketStateV2",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
           "isMut": false,
           "isSigner": false
         },
@@ -215,289 +147,571 @@
           "name": "systemProgram",
           "isMut": false,
           "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "newMember",
+          "type": "publicKey"
         },
         {
-          "name": "rent",
+          "name": "newThreshold",
+          "type": "u16"
+        }
+      ]
+    },
+    {
+      "name": "changeThreshold",
+      "accounts": [
+        {
+          "name": "multisig",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "multisigAuth",
+          "isMut": true,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "newThreshold",
+          "type": "u16"
+        }
+      ]
+    },
+    {
+      "name": "addAuthority",
+      "accounts": [
+        {
+          "name": "multisig",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "multisigAuth",
+          "isMut": true,
+          "isSigner": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "setExternalExecute",
+      "accounts": [
+        {
+          "name": "multisig",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "multisigAuth",
+          "isMut": true,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "setting",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "createTransaction",
+      "accounts": [
+        {
+          "name": "multisig",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "transaction",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "creator",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
       ],
       "args": [
         {
-          "name": "solventAuthorityBump",
-          "type": "u8"
-        },
-        {
-          "name": "bucketStateNewBump",
-          "type": "u8"
+          "name": "authorityIndex",
+          "type": "u32"
         }
       ]
+    },
+    {
+      "name": "activateTransaction",
+      "accounts": [
+        {
+          "name": "multisig",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "transaction",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "creator",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "addInstruction",
+      "accounts": [
+        {
+          "name": "multisig",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "transaction",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "instruction",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "creator",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "incomingInstruction",
+          "type": {
+            "defined": "IncomingInstruction"
+          }
+        }
+      ]
+    },
+    {
+      "name": "approveTransaction",
+      "accounts": [
+        {
+          "name": "multisig",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "transaction",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "member",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "rejectTransaction",
+      "accounts": [
+        {
+          "name": "multisig",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "transaction",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "member",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "cancelTransaction",
+      "accounts": [
+        {
+          "name": "multisig",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "transaction",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "member",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "executeTransaction",
+      "accounts": [
+        {
+          "name": "multisig",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "transaction",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "member",
+          "isMut": true,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "accountList",
+          "type": "bytes"
+        }
+      ]
+    },
+    {
+      "name": "executeInstruction",
+      "accounts": [
+        {
+          "name": "multisig",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "transaction",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "instruction",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "member",
+          "isMut": true,
+          "isSigner": true
+        }
+      ],
+      "args": []
     }
   ],
   "accounts": [
     {
-      "name": "bucketState",
+      "name": "Ms",
       "type": {
         "kind": "struct",
         "fields": [
+          {
+            "name": "threshold",
+            "type": "u16"
+          },
+          {
+            "name": "authorityIndex",
+            "type": "u16"
+          },
+          {
+            "name": "transactionIndex",
+            "type": "u32"
+          },
+          {
+            "name": "msChangeIndex",
+            "type": "u32"
+          },
           {
             "name": "bump",
             "type": "u8"
           },
           {
-            "name": "bucketMint",
+            "name": "createKey",
             "type": "publicKey"
           },
           {
-            "name": "symbol",
-            "type": "string"
+            "name": "allowExternalExecute",
+            "type": "bool"
           },
           {
-            "name": "nftCollectionCreator",
-            "type": "publicKey"
-          }
-        ]
-      }
-    },
-    {
-      "name": "bucketStateV2",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "bump",
-            "type": "u8"
-          },
-          {
-            "name": "bucketMint",
-            "type": "publicKey"
-          },
-          {
-            "name": "symbol",
-            "type": "string"
-          },
-          {
-            "name": "verifiedCreators",
+            "name": "keys",
             "type": {
               "vec": "publicKey"
             }
           }
         ]
       }
+    },
+    {
+      "name": "MsTransaction",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "creator",
+            "type": "publicKey"
+          },
+          {
+            "name": "ms",
+            "type": "publicKey"
+          },
+          {
+            "name": "transactionIndex",
+            "type": "u32"
+          },
+          {
+            "name": "authorityIndex",
+            "type": "u32"
+          },
+          {
+            "name": "authorityBump",
+            "type": "u8"
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": "MsTransactionStatus"
+            }
+          },
+          {
+            "name": "instructionIndex",
+            "type": "u8"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "approved",
+            "type": {
+              "vec": "publicKey"
+            }
+          },
+          {
+            "name": "rejected",
+            "type": {
+              "vec": "publicKey"
+            }
+          },
+          {
+            "name": "cancelled",
+            "type": {
+              "vec": "publicKey"
+            }
+          },
+          {
+            "name": "executedIndex",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MsInstruction",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "programId",
+            "type": "publicKey"
+          },
+          {
+            "name": "keys",
+            "type": {
+              "vec": {
+                "defined": "MsAccountMeta"
+              }
+            }
+          },
+          {
+            "name": "data",
+            "type": "bytes"
+          },
+          {
+            "name": "instructionIndex",
+            "type": "u8"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "executed",
+            "type": "bool"
+          }
+        ]
+      }
     }
   ],
-  "events": [
+  "types": [
     {
-      "name": "BucketCreationEvent",
-      "fields": [
-        {
-          "name": "msg",
-          "type": "string",
-          "index": true
-        },
-        {
-          "name": "symbol",
-          "type": "string",
-          "index": false
-        }
-      ]
+      "name": "MsAccountMeta",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pubkey",
+            "type": "publicKey"
+          },
+          {
+            "name": "isSigner",
+            "type": "bool"
+          },
+          {
+            "name": "isWritable",
+            "type": "bool"
+          }
+        ]
+      }
     },
     {
-      "name": "BucketMigrationEvent",
-      "fields": [
-        {
-          "name": "msg",
-          "type": "string",
-          "index": true
-        },
-        {
-          "name": "symbol",
-          "type": "string",
-          "index": false
-        }
-      ]
+      "name": "IncomingInstruction",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "programId",
+            "type": "publicKey"
+          },
+          {
+            "name": "keys",
+            "type": {
+              "vec": {
+                "defined": "MsAccountMeta"
+              }
+            }
+          },
+          {
+            "name": "data",
+            "type": "bytes"
+          }
+        ]
+      }
     },
     {
-      "name": "NFTDepositInBucketEvent",
-      "fields": [
-        {
-          "name": "depositor",
-          "type": "string",
-          "index": false
-        },
-        {
-          "name": "nftMint",
-          "type": "string",
-          "index": false
-        },
-        {
-          "name": "msg",
-          "type": "string",
-          "index": true
-        }
-      ]
-    },
-    {
-      "name": "DropletsMintEvent",
-      "fields": [
-        {
-          "name": "recipient",
-          "type": "string",
-          "index": false
-        },
-        {
-          "name": "tokenMint",
-          "type": "string",
-          "index": false
-        },
-        {
-          "name": "msg",
-          "type": "string",
-          "index": true
-        }
-      ]
-    },
-    {
-      "name": "DropletsMintFeeEvent",
-      "fields": [
-        {
-          "name": "recipient",
-          "type": "string",
-          "index": false
-        },
-        {
-          "name": "tokenMint",
-          "type": "string",
-          "index": false
-        },
-        {
-          "name": "msg",
-          "type": "string",
-          "index": true
-        }
-      ]
-    },
-    {
-      "name": "DropletBurnEvent",
-      "fields": [
-        {
-          "name": "currentOwner",
-          "type": "string",
-          "index": false
-        },
-        {
-          "name": "tokenMint",
-          "type": "string",
-          "index": false
-        },
-        {
-          "name": "msg",
-          "type": "string",
-          "index": true
-        }
-      ]
-    },
-    {
-      "name": "NFTRedeemEvent",
-      "fields": [
-        {
-          "name": "recipient",
-          "type": "string",
-          "index": false
-        },
-        {
-          "name": "nftMint",
-          "type": "string",
-          "index": false
-        },
-        {
-          "name": "msg",
-          "type": "string",
-          "index": true
-        }
-      ]
-    },
-    {
-      "name": "CloseAccountEvent",
-      "fields": [
-        {
-          "name": "accountClosing",
-          "type": "string",
-          "index": false
-        },
-        {
-          "name": "ultimateRecipient",
-          "type": "string",
-          "index": false
-        },
-        {
-          "name": "msg",
-          "type": "string",
-          "index": true
-        }
-      ]
-    },
-    {
-      "name": "UnsuccessfulOperationEvent",
-      "fields": [
-        {
-          "name": "msg",
-          "type": "string",
-          "index": true
-        }
-      ]
+      "name": "MsTransactionStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Draft"
+          },
+          {
+            "name": "Active"
+          },
+          {
+            "name": "ExecuteReady"
+          },
+          {
+            "name": "Executed"
+          },
+          {
+            "name": "Rejected"
+          },
+          {
+            "name": "Cancelled"
+          }
+        ]
+      }
     }
   ],
   "errors": [
     {
-      "code": 300,
-      "name": "InvalidBucketSymbolError",
-      "msg": "The bucket symbol you entered is invalid."
+      "code": 6000,
+      "name": "KeyNotInMultisig"
     },
     {
-      "code": 301,
-      "name": "ExceededAdditionalCreatorArrayError",
-      "msg": "Only upto 5 additional creator addresses are permitted."
+      "code": 6001,
+      "name": "InvalidTransactionState"
     },
     {
-      "code": 302,
-      "name": "VerifyCreatorError",
-      "msg": "Failed to verify the authenticity of the creator."
+      "code": 6002,
+      "name": "InvalidNumberOfAccounts"
     },
     {
-      "code": 303,
-      "name": "UnauthorizedAccessError",
-      "msg": "Failed to authorize suitable access. Invalid credentials."
+      "code": 6003,
+      "name": "InvalidInstructionAccount"
     },
     {
-      "code": 304,
-      "name": "NFTDepositError",
-      "msg": "Failed to execute depositing of NFTs to bucket."
+      "code": 6004,
+      "name": "InvalidAuthorityIndex"
     },
     {
-      "code": 305,
-      "name": "DropletsMintError",
-      "msg": "Failed to mint droplets in exchange of NFTs."
+      "code": 6005,
+      "name": "TransactionAlreadyExecuted"
     },
     {
-      "code": 306,
-      "name": "DropletsMintFeeError",
-      "msg": "Failed to mint droplets as mint fees to Solvent platform."
+      "code": 6006,
+      "name": "CannotRemoveSoloMember"
     },
     {
-      "code": 307,
-      "name": "RedeemDropletsForNFTError",
-      "msg": "Failed to redeem the NFT in exchange of the droplet."
+      "code": 6007,
+      "name": "InvalidThreshold"
     },
     {
-      "code": 308,
-      "name": "BurnDropletsError",
-      "msg": "Failed to burn the droplet tokens."
+      "code": 6008,
+      "name": "DeprecatedTransaction"
     },
     {
-      "code": 309,
-      "name": "CloseAccountError",
-      "msg": "Failed to close an account on-chain."
+      "code": 6009,
+      "name": "InstructionFailed"
+    },
+    {
+      "code": 6010,
+      "name": "MaxMembersReached"
+    },
+    {
+      "code": 6011,
+      "name": "EmptyMembers"
+    },
+    {
+      "code": 6012,
+      "name": "PartialExecution"
     }
   ]
 }

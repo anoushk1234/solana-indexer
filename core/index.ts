@@ -39,12 +39,13 @@ const main = async () => {
               : Status.OK
             : Status.FAILING
         );
-        // console.log(accounts);
+        console.log(parsedAccounts[0]);
         return parsedAccounts;
       })
   );
   // console.log(chalk.greenBright(qtys));
   fs.writeFileSync("output.json", JSON.stringify(final));
+  // console.log(qtys);
   programId && dashboard(programId, parser.accountNames, qtys, statuses);
 };
 main();
