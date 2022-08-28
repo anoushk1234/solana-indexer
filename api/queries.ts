@@ -1,7 +1,7 @@
 import fs from "fs";
 import { Idl } from "@project-serum/anchor";
 require("dotenv").config();
-
+import { PrismaClient } from "@prisma/client";
 const config = fs.readFileSync("./config.json", "utf8");
 const { programId, idlPath } = JSON.parse(config);
 const idl = JSON.parse(fs.readFileSync(idlPath, "utf8")) as Idl;
