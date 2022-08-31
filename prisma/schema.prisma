@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://postgres:FdthpsMTpWC3ZK7HW0hc@containers-us-west-46.railway.app:7874/railway"
 }
 
 model CandyMachine {
@@ -16,7 +16,7 @@ model CandyMachine {
   wallet        String
   tokenMint     String?
   itemsRedeemed Int
-  datas         CandyMachineOnCandyMachineData[]
+  data         CandyMachineOnCandyMachineData[]
 }
 
 model CandyMachineOnCandyMachineData {

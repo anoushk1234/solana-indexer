@@ -1,0 +1,335 @@
+{
+    "version": "0.1.0",
+    "name": "smart_wallet",
+    "instructions": [
+      {
+        "name": "createAccount",
+        "accounts": [
+          {
+            "name": "metadata",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "smartWallet",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "authority",
+            "isMut": false,
+            "isSigner": true
+          },
+          {
+            "name": "feePayer",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "username",
+            "type": "string"
+          },
+          {
+            "name": "guardian",
+            "type": "publicKey"
+          }
+        ]
+      },
+      {
+        "name": "executeExternal",
+        "accounts": [
+          {
+            "name": "smartWallet",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "metadata",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "authority",
+            "isMut": false,
+            "isSigner": true
+          }
+        ],
+        "args": [
+          {
+            "name": "username",
+            "type": "string"
+          },
+          {
+            "name": "program",
+            "type": "publicKey"
+          },
+          {
+            "name": "data",
+            "type": "bytes"
+          }
+        ]
+      },
+      {
+        "name": "initiateRecovery",
+        "accounts": [
+          {
+            "name": "userMetadata",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "smartWallet",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "guardian",
+            "isMut": false,
+            "isSigner": true
+          },
+          {
+            "name": "guardianMetadata",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "username",
+            "type": "string"
+          },
+          {
+            "name": "newAuthority",
+            "type": "publicKey"
+          }
+        ]
+      },
+      {
+        "name": "supportRecovery",
+        "accounts": [
+          {
+            "name": "userMetadata",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "smartWallet",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "guardian",
+            "isMut": false,
+            "isSigner": true
+          },
+          {
+            "name": "guardianMetadata",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "username",
+            "type": "string"
+          },
+          {
+            "name": "newAuthority",
+            "type": "publicKey"
+          }
+        ]
+      },
+      {
+        "name": "executeRecovery",
+        "accounts": [
+          {
+            "name": "metadata",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "smartWallet",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "newAuthority",
+            "isMut": false,
+            "isSigner": true
+          }
+        ],
+        "args": [
+          {
+            "name": "username",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "name": "addGuardian",
+        "accounts": [
+          {
+            "name": "metadata",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "smartWallet",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "authority",
+            "isMut": false,
+            "isSigner": true
+          }
+        ],
+        "args": [
+          {
+            "name": "username",
+            "type": "string"
+          },
+          {
+            "name": "guardian",
+            "type": "publicKey"
+          }
+        ]
+      },
+      {
+        "name": "removeGuardian",
+        "accounts": [
+          {
+            "name": "metadata",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "smartWallet",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "authority",
+            "isMut": false,
+            "isSigner": true
+          }
+        ],
+        "args": [
+          {
+            "name": "username",
+            "type": "string"
+          },
+          {
+            "name": "guardian",
+            "type": "publicKey"
+          }
+        ]
+      }
+    ],
+    "accounts": [
+      {
+        "name": "Metadata",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "authority",
+              "type": "publicKey"
+            },
+            {
+              "name": "address",
+              "type": "publicKey"
+            },
+            {
+              "name": "createdAt",
+              "type": "i64"
+            },
+            {
+              "name": "inRecovery",
+              "type": "bool"
+            },
+            {
+              "name": "currRecoveryRound",
+              "type": "u128"
+            },
+            {
+              "name": "recovery",
+              "type": {
+                "vec": {
+                  "defined": "Recovery"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "types": [
+      {
+        "name": "Recovery",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "guardian",
+              "type": "publicKey"
+            },
+            {
+              "name": "newAuthority",
+              "type": "publicKey"
+            },
+            {
+              "name": "timestamp",
+              "type": "i64"
+            },
+            {
+              "name": "recoveryRound",
+              "type": "u128"
+            }
+          ]
+        }
+      }
+    ],
+    "errors": [
+      {
+        "code": 6000,
+        "name": "InsufficientFunds",
+        "msg": "Insufficient funds"
+      },
+      {
+        "code": 6001,
+        "name": "InRecoveryMode",
+        "msg": "Wallet is in recovery mode"
+      },
+      {
+        "code": 6002,
+        "name": "AlreadyGuardian",
+        "msg": "Already a guardian"
+      },
+      {
+        "code": 6003,
+        "name": "MustBeInRecoveryMode",
+        "msg": "Wallet must be in recovery mode"
+      },
+      {
+        "code": 6004,
+        "name": "Unauthorized",
+        "msg": "Unauthorized"
+      },
+      {
+        "code": 6005,
+        "name": "RecoveryFailed",
+        "msg": "Recovery failed"
+      }
+    ],
+    "metadata": {
+      "address": "APKczhbKVSzKd8suL98RLTdCWM92yBXH8EABG73Txm6h"
+    }
+  }
